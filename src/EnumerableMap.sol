@@ -4,7 +4,7 @@
 
 pragma solidity ^0.8.20;
 
-import {EnumerableSet} from "./EnumerableSet.sol";
+import { EnumerableSet } from "./EnumerableSet.sol";
 
 /**
  * Fork of OZ's EnumerableSet that makes all storage access ERC-4337 compliant via associated storage
@@ -73,7 +73,12 @@ library EnumerableMap {
      * Returns true if the key was added to the map, that is if it was not
      * already present.
      */
-    function set(Bytes32ToBytes32Map storage map, address account, bytes32 key, bytes32 value)
+    function set(
+        Bytes32ToBytes32Map storage map,
+        address account,
+        bytes32 key,
+        bytes32 value
+    )
         internal
         returns (bool)
     {
@@ -115,7 +120,11 @@ library EnumerableMap {
      *
      * - `index` must be strictly less than {length}.
      */
-    function at(Bytes32ToBytes32Map storage map, address account, uint256 index)
+    function at(
+        Bytes32ToBytes32Map storage map,
+        address account,
+        uint256 index
+    )
         internal
         view
         returns (bytes32, bytes32)
@@ -128,7 +137,11 @@ library EnumerableMap {
      * @dev Tries to returns the value associated with `key`. O(1).
      * Does not revert if `key` is not in the map.
      */
-    function tryGet(Bytes32ToBytes32Map storage map, address account, bytes32 key)
+    function tryGet(
+        Bytes32ToBytes32Map storage map,
+        address account,
+        bytes32 key
+    )
         internal
         view
         returns (bool, bytes32)
@@ -311,7 +324,11 @@ library EnumerableMap {
      *
      * - `index` must be strictly less than {length}.
      */
-    function at(UintToAddressMap storage map, address account, uint256 index)
+    function at(
+        UintToAddressMap storage map,
+        address account,
+        uint256 index
+    )
         internal
         view
         returns (uint256, address)
@@ -409,7 +426,11 @@ library EnumerableMap {
      *
      * - `index` must be strictly less than {length}.
      */
-    function at(AddressToUintMap storage map, address account, uint256 index)
+    function at(
+        AddressToUintMap storage map,
+        address account,
+        uint256 index
+    )
         internal
         view
         returns (address, uint256)
@@ -507,7 +528,11 @@ library EnumerableMap {
      *
      * - `index` must be strictly less than {length}.
      */
-    function at(Bytes32ToUintMap storage map, address account, uint256 index)
+    function at(
+        Bytes32ToUintMap storage map,
+        address account,
+        uint256 index
+    )
         internal
         view
         returns (bytes32, uint256)
