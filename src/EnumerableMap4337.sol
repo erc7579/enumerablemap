@@ -4,7 +4,7 @@
 
 pragma solidity ^0.8.20;
 
-import { EnumerableSet } from "./EnumerableSet.sol";
+import { EnumerableSet } from "./EnumerableSet4337.sol";
 
 /**
  * Fork of OZ's EnumerableSet that makes all storage access ERC-4337 compliant via associated storage
