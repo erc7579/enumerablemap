@@ -1,6 +1,10 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
+/**
+ * Dynamic arrays associated with an account address as per ERC-7562/ERC-4337
+ * @author filio.eth (Biconomy), zeroknots.eth (rhinestone)
+ */
 library AssociatedArrayLib {
     using AssociatedArrayLib for *;
 

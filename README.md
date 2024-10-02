@@ -1,66 +1,10 @@
-## Foundry
+# Libraries for ERC-4337 compatible dynamic arrays in storage.
 
-**Foundry is a blazing fast, portable and modular toolkit for Ethereum application development written in Rust.**
+## Motivation
+Dynamic array are not easily compatible with ERC-4337 [associated storage](https://eips.ethereum.org/EIPS/eip-7562#validation-rules) access rules. Even if they are a value in a mapping, where the Smart Account address is the key, the final keccak won't be `keccak(A||x)+n` as it would be for a static array, but `keccak(keccak(A||x))+n` instead.
 
-Foundry consists of:
+## What's included
+- AssociatedArrayLib.sol: Library for dynamic arrays that are associated with an address as per [ERC-7562](https://eips.ethereum.org/EIPS/eip-7562). It is achieved by using `keccak(A||x)` as the starting slot for the array.
+- EnumerableSet4337.sol: Fork of OZ's EnumerableSet that makes all storage access ERC-4337 compliant via associated storage. Stores indexes in a mapping making access to a given value easier.
+- EnumerableMap4337.sol: Library for managing an enumerable variant of Solidity's [`mapping`](https://solidity.readthedocs.io/en/latest/types.html#mapping-types) type.
 
--   **Forge**: Ethereum testing framework (like Truffle, Hardhat and DappTools).
--   **Cast**: Swiss army knife for interacting with EVM smart contracts, sending transactions and getting chain data.
--   **Anvil**: Local Ethereum node, akin to Ganache, Hardhat Network.
--   **Chisel**: Fast, utilitarian, and verbose solidity REPL.
-
-## Documentation
-
-https://book.getfoundry.sh/
-
-## Usage
-
-### Build
-
-```shell
-$ forge build
-```
-
-### Test
-
-```shell
-$ forge test
-```
-
-### Format
-
-```shell
-$ forge fmt
-```
-
-### Gas Snapshots
-
-```shell
-$ forge snapshot
-```
-
-### Anvil
-
-```shell
-$ anvil
-```
-
-### Deploy
-
-```shell
-$ forge script script/Counter.s.sol:CounterScript --rpc-url <your_rpc_url> --private-key <your_private_key>
-```
-
-### Cast
-
-```shell
-$ cast <subcommand>
-```
-
-### Help
-
-```shell
-$ forge --help
-$ anvil --help
-$ cast --help
-```
