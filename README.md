@@ -8,3 +8,5 @@ Dynamic array are not easily compatible with ERC-4337 [associated storage](https
 - EnumerableSet4337.sol: Fork of OZ's EnumerableSet that makes all storage access ERC-4337 compliant via associated storage. Stores indexes in a mapping making access to a given value easier.
 - EnumerableMap4337.sol: Library for managing an enumerable variant of Solidity's [`mapping`](https://solidity.readthedocs.io/en/latest/types.html#mapping-types) type.
 
+## Disclaimer
+These libraries are provided as-is, without any warranty or guarantee of any kind. Use them at your own risk.
