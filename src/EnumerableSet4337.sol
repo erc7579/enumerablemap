@@ -206,7 +206,7 @@ library EnumerableSet {
         bytes32[] memory result;
 
         /// @solidity memory-safe-assembly
-        assembly {
+        assembly ("memory-safe") {
             result := store
         }
 
@@ -284,7 +284,7 @@ library EnumerableSet {
         address[] memory result;
 
         /// @solidity memory-safe-assembly
-        assembly {
+        assembly ("memory-safe") {
             result := store
         }
 
@@ -362,7 +362,7 @@ library EnumerableSet {
         uint256[] memory result;
 
         /// @solidity memory-safe-assembly
-        assembly {
+        assembly ("memory-safe") {
             result := store
         }
 

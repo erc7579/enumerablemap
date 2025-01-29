@@ -268,7 +268,7 @@ library EnumerableMap {
         uint256[] memory result;
 
         /// @solidity memory-safe-assembly
-        assembly {
+        assembly ("memory-safe") {
             result := store
         }
 
@@ -370,7 +370,7 @@ library EnumerableMap {
         uint256[] memory result;
 
         /// @solidity memory-safe-assembly
-        assembly {
+        assembly ("memory-safe") {
             result := store
         }
 
@@ -472,7 +472,7 @@ library EnumerableMap {
         address[] memory result;
 
         /// @solidity memory-safe-assembly
-        assembly {
+        assembly ("memory-safe") {
             result := store
         }
 
@@ -574,7 +574,7 @@ library EnumerableMap {
         bytes32[] memory result;
 
         /// @solidity memory-safe-assembly
-        assembly {
+        assembly ("memory-safe") {
             result := store
         }
 

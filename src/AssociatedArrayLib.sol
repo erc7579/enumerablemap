@@ -15,7 +15,7 @@ library AssociatedArrayLib {
     }
 
     function _slot(Array storage s, address account) private pure returns (bytes32 __slot) {
-        assembly {
+        assembly ("memory-safe") {
             mstore(0x00, account)
             mstore(0x20, s.slot)
             __slot := keccak256(0x00, 0x40)
@@ -24,7 +24,7 @@ library AssociatedArrayLib {
 
     function _length(Array storage s, address account) private view returns (uint256 __length) {
         bytes32 slot = _slot(s, account);
-        assembly {
+        assembly ("memory-safe") {
             __length := sload(slot)
         }
     }
@@ -34,7 +34,7 @@ library AssociatedArrayLib {
     }
 
     function _get(bytes32 slot, uint256 index) private view returns (bytes32 value) {
-        assembly {
+        assembly ("memory-safe") {
             //if (index >= _length(s, account)) revert AssociatedArray_OutOfBounds(index);
             if iszero(lt(index, sload(slot))) {
                 mstore(0, 0x8277484f) // `AssociatedArray_OutOfBounds(uint256)`
@@ -48,7 +48,7 @@ library AssociatedArrayLib {
     function _getAll(Array storage s, address account) private view returns (bytes32[] memory values) {
         bytes32 slot = _slot(s, account);
         uint256 __length;
-        assembly {
+        assembly ("memory-safe") {
             __length := sload(slot)
         }
         values = new bytes32[](__length);
@@ -63,7 +63,7 @@ library AssociatedArrayLib {
     function _contains(Array storage s, address account, bytes32 value) private view returns (bool) {
         bytes32 slot = _slot(s, account);
         uint256 __length;
-        assembly {
+        assembly ("memory-safe") {
             __length := sload(slot)
         }
         for (uint256 i; i < __length; i++) {
@@ -79,7 +79,7 @@ library AssociatedArrayLib {
     }
 
     function _set(bytes32 slot, uint256 index, bytes32 value) private {
-        assembly {
+        assembly ("memory-safe") {
             //if (index >= _length(s, account)) revert AssociatedArray_OutOfBounds(index);
             if iszero(lt(index, sload(slot))) {
                 mstore(0, 0x8277484f) // `AssociatedArray_OutOfBounds(uint256)`
@@ -92,7 +92,7 @@ library AssociatedArrayLib {
 
     function _push(Array storage s, address account, bytes32 value) private {
         bytes32 slot = _slot(s, account);
-        assembly {
+        assembly ("memory-safe") {
             // load length (stored @ slot), add 1 to it => index.
             // mul index by 0x20 and add it to orig slot to get the next free slot
             let index := add(sload(slot), 1)
@@ -104,12 +104,12 @@ library AssociatedArrayLib {
     function _pop(Array storage s, address account) private {
         bytes32 slot = _slot(s, account);
         uint256 __length;
-        assembly {
+        assembly ("memory-safe") {
             __length := sload(slot)
         }
         if (__length == 0) return;
         _set(slot, __length - 1, 0);
-        assembly {
+        assembly ("memory-safe") {
             sstore(slot, sub(__length, 1))
         }
     }
@@ -117,7 +117,7 @@ library AssociatedArrayLib {
     function _remove(Array storage s, address account, uint256 index) private {
         bytes32 slot = _slot(s, account);
         uint256 __length;
-        assembly {
+        assembly ("memory-safe") {
             __length := sload(slot)
             if iszero(lt(index, __length)) {
                 mstore(0, 0x8277484f) // `AssociatedArray_OutOfBounds(uint256)`
@@ -127,7 +127,7 @@ library AssociatedArrayLib {
         }
         _set(slot, index, _get(s, account, __length - 1));
 
-        assembly {
+        assembly ("memory-safe") {
             // clear the last slot
             // this is the 'unchecked' version of _set(slot, __length - 1, 0)
             // as we use length-1 as index, so the check is excessive.
@@ -197,7 +197,7 @@ library AssociatedArrayLib {
         address[] memory addressArray;
 
         /// @solidity memory-safe-assembly
-        assembly {
+        assembly ("memory-safe") {
             addressArray := bytes32Array
         }
         return addressArray;
@@ -246,7 +246,7 @@ library AssociatedArrayLib {
         uint256[] memory uintArray;
 
         /// @solidity memory-safe-assembly
-        assembly {
+        assembly ("memory-safe") {
             uintArray := bytes32Array
         }
         return uintArray;
